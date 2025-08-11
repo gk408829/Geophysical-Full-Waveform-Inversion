@@ -1,4 +1,8 @@
-# Deep Learning For Full Waveform Inversion (FWI)
+# Swin-UNet: Full Waveform Inversion with Swin Transformers
+
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![PyTorch](https://img.shields.io/badge/pytorch-2.0+-red.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 This repository contains a high-performance, feature-rich PyTorch pipeline for training a deep learning model for Full-Waveform Inversion (FWI) using the OpenFWI dataset. The model, based on a U-Net architecture with a **Swin Transformer v2** backbone, predicts subsurface velocity models from multi-source seismic data.
 
@@ -16,6 +20,12 @@ A U-Net style model with a powerful, pretrained Swin Transformer v2 encoder and 
 - **Automatic Mixed Precision (AMP)** with `bfloat16` for faster training and reduced memory usage.
 - **`torch.compile` Integration**: Leverages PyTorch 2.0+ for significant speedups.
 - **Optimized Data Loading**: High-performance `DataLoader` with persistent, pre-fetching workers.
+
+### Comprehensive Loss Function
+
+- **Huber loss** for robust regression
+- **Gradient matching loss** for structural preservation
+- **Total variation regularization** for smooth outputs
 
 ### State of the Art (SOTA) Techniques
 
@@ -41,8 +51,8 @@ A U-Net style model with a powerful, pretrained Swin Transformer v2 encoder and 
 
 ### 1. Clone the repository
 
-    git clone https://github.com/gk408829/Geophysical-Full-Waveform-Inversion.git
-    cd Geophysical-Full-Waveform-Inversion
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
 
 ### 2. Create a virtual environment (recommended):
 
@@ -158,3 +168,17 @@ The script is organized into logical, reusable components:
 - Training and Validation Loops: The core `train_one_epoch` and `validate_one_epoch` functions.
 
 - `main()`: The main execution function that orchestrates the entire pipeline.
+
+## Citation
+
+If you use this code in your research, please cite:
+
+    @misc{swinv2fwi2023,
+    author = {Gaurav Khanal},
+    title = {SwinV2-FWI: Full Waveform Inversion with Swin Transformers},
+    year = {2023},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/yourusername/swinv2-fwi}}
+    }
+
