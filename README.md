@@ -78,6 +78,7 @@ A `requirements.txt` file can be created with the following contents.
     tqdm
     torchmetrics
     tensorboard
+    onnx
 
 Install them using pip:
 
