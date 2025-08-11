@@ -173,12 +173,12 @@ The script is organized into logical, reusable components:
 
 If you use this code in your research, please cite:
 
-    @misc{swinv2fwi2023,
-    author = {Gaurav Khanal},
-    title = {SwinV2-FWI: Full Waveform Inversion with Swin Transformers},
-    year = {2023},
-    publisher = {GitHub},
-    journal = {GitHub repository},
-    howpublished = {\url{https://github.com/yourusername/swinv2-fwi}}
+    @misc{swinunet2025,
+        author = {Gaurav Khanal},
+        title = {Swin-UNet: Full Waveform Inversion with Swin Transformers},
+        year = {2025},
+        publisher = {GitHub},
+        journal = {GitHub repository},
+        howpublished = {\url{https://github.com/gk408829/Geophysical-Full-Waveform-Inversion}}
     }
 
