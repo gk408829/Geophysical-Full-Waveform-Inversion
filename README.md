@@ -1,4 +1,4 @@
-# Swin-UNet: Full Waveform Inversion with Swin Transformers
+# FWISwinUNet: Full Waveform Inversion with Swin Transformers
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![PyTorch](https://img.shields.io/badge/pytorch-2.0+-red.svg)
