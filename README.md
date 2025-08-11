@@ -41,8 +41,8 @@ A U-Net style model with a powerful, pretrained Swin Transformer v2 encoder and 
 
 ### 1. Clone the repository
 
-    git clone https://github.com/your-username/your-repo-name.git
-    cd your-repo-name
+    git clone https://github.com/gk408829/Geophysical-Full-Waveform-Inversion.git
+    cd Geophysical-Full-Waveform-Inversion
 
 ### 2. Create a virtual environment (recommended):
 
