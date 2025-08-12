@@ -25,7 +25,7 @@ A U-Net style model with a powerful, pretrained Swin Transformer v2 encoder and 
 
 The combined loss function is a comprehensive combination of loss functions to provide the best (yet) performance:
 
-L_Combined = α·L_Huber + β·L_Gradient + γ·L_TV
+$$ \mathcal{L}_{\text{Combined}} = \alpha \cdot \mathcal{L}_{\text{Huber}} + \beta \cdot \mathcal{L}_{\text{Gradient}} + \gamma \cdot \mathcal{L}_{\text{TV}} $$
 
 - **Huber loss** for robust regression (i.e., accurate overall reconstruction)
 - **Gradient loss** for structural preservation (i.e., preserve sharp details)
