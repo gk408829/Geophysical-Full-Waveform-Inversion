@@ -1,0 +1,306 @@
+2025-07-27 18:41:30,703 [INFO] - --- Starting Experiment: SwinV2_FWI_Combined_Loss_LRWarmRestart ---
+2025-07-27 18:41:30,703 [INFO] - Mode: DDP | World Size: 2
+2025-07-27 18:41:32,489 [INFO] - DDP communication validated successfully.
+2025-07-27 18:41:32,510 [INFO] - Calculating class weights for loss balancing...
+2025-07-27 18:41:32,511 [INFO] - Calculated loss weights: {'Fault': 0.5549132947976879, 'Vel': 1.0, 'Style': 0.8930232558139534}
+2025-07-27 18:41:32,511 [INFO] - --- Dataset Analysis ---
+2025-07-27 18:41:32,534 [INFO] - Split: Training | Total Samples: 376500
+2025-07-27 18:41:32,534 [INFO] -   - Group: Fault  | Samples: 173000
+2025-07-27 18:41:32,534 [INFO] -   - Group: Style  | Samples: 107500
+2025-07-27 18:41:32,534 [INFO] -   - Group: Vel    | Samples: 96000
+2025-07-27 18:41:32,539 [INFO] - Split: Validation | Total Samples: 93500
+2025-07-27 18:41:32,539 [INFO] -   - Group: Fault  | Samples: 43000
+2025-07-27 18:41:32,539 [INFO] -   - Group: Style  | Samples: 26500
+2025-07-27 18:41:32,539 [INFO] -   - Group: Vel    | Samples: 24000
+2025-07-27 18:41:32,539 [INFO] - ------------------------
+2025-07-27 18:41:32,661 [INFO] - Using 48 workers per DataLoader process.
+2025-07-27 18:41:32,662 [INFO] - DataLoaders created. Train batches per GPU: 735
+2025-07-27 18:41:32,956 [INFO] - Loading pretrained weights from Hugging Face hub (timm/swinv2_tiny_window8_256.ms_in1k)
+2025-07-27 18:41:33,278 [INFO] - [timm/swinv2_tiny_window8_256.ms_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2025-07-27 18:41:33,818 [INFO] - Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+2025-07-27 18:41:33,824 [INFO] - Gradient checkpointing enabled for backbone.
+2025-07-27 18:41:33,824 [INFO] - Building enhanced decoder with channels: [512, 256, 128]
+2025-07-27 18:41:33,824 [INFO] - Encoder channels: [96, 192, 384, 768]
+2025-07-27 18:41:33,933 [INFO] - Decoder layer 0: 768 + 384 -> 512
+2025-07-27 18:41:33,976 [INFO] - Decoder layer 1: 512 + 192 -> 256
+2025-07-27 18:41:33,988 [INFO] - Decoder layer 2: 256 + 96 -> 128
+2025-07-27 18:41:33,991 [INFO] - Enhanced decoder parameters: 47,520,064 (63.3% of total)
+2025-07-27 18:41:33,991 [INFO] - Decoder enhancements: Learned upsampling + Residual blocks + Enhanced final processing
+2025-07-27 18:41:34,023 [INFO] - Performing model output validation...
+2025-07-27 18:41:35,470 [INFO] - Model output validation passed.
+2025-07-27 18:41:35,495 [INFO] - Using CosineAnnealingWarmRestarts with T_0=5880 steps (8 epochs), T_mult=2, starting after 3675 warmup steps
+2025-07-27 18:41:35,496 [INFO] - Warm restart schedule validation:
+2025-07-27 18:41:35,496 [INFO] -   - Total training steps: 36750
+2025-07-27 18:41:35,496 [INFO] -   - Warmup steps: 3675
+2025-07-27 18:41:35,496 [INFO] -   - Steps per epoch: 735
+2025-07-27 18:41:35,496 [INFO] -   - Initial restart period: 5880 steps (8 epochs)
+2025-07-27 18:41:35,496 [INFO] -   - Expected restarts at steps: [9555, 21315]
+2025-07-27 18:41:35,496 [INFO] -   - Total expected restarts: 2
+2025-07-27 18:41:35,509 [INFO] - --- Model & Training Setup ---
+2025-07-27 18:41:37,421 [INFO] - Starting training from epoch 1...
+2025-07-27 19:13:51,329 [INFO] - --- Epoch 1/50 | Time: 1933.91s ---
+2025-07-27 19:13:51,330 [INFO] -   Train -> Loss: 0.1154 | MAE: 439.84 | Grad Norm: 0.38
+2025-07-27 19:13:51,330 [INFO] -   - Val Vel   -> Loss: 0.1328 | MAE: 398.78 | SSIM: 0.4973
+2025-07-27 19:13:51,330 [INFO] -   - Val Style -> Loss: 0.0639 | MAE: 191.19 | SSIM: 0.7389
+2025-07-27 19:13:51,330 [INFO] -   - Val Fault -> Loss: 0.1123 | MAE: 335.04 | SSIM: 0.6343
+2025-07-27 19:13:51,330 [INFO] -   Overall Valid -> Avg MAE: 308.34
+2025-07-27 19:13:51,333 [INFO] - Metric improved to 308.3360. Saving best EMA model.
+2025-07-27 19:46:00,622 [INFO] - --- Epoch 2/50 | Time: 1928.63s ---
+2025-07-27 19:46:00,623 [INFO] -   Train -> Loss: 0.0822 | MAE: 243.82 | Grad Norm: 0.34
+2025-07-27 19:46:00,623 [INFO] -   - Val Vel   -> Loss: 0.0891 | MAE: 267.63 | SSIM: 0.5956
+2025-07-27 19:46:00,623 [INFO] -   - Val Style -> Loss: 0.0471 | MAE: 141.17 | SSIM: 0.7914
+2025-07-27 19:46:00,623 [INFO] -   - Val Fault -> Loss: 0.0666 | MAE: 199.97 | SSIM: 0.7111
+2025-07-27 19:46:00,623 [INFO] -   Overall Valid -> Avg MAE: 202.92
+2025-07-27 19:46:00,626 [INFO] - Metric improved to 202.9213. Saving best EMA model.
+2025-07-27 20:18:09,420 [INFO] - --- Epoch 3/50 | Time: 1928.09s ---
+2025-07-27 20:18:09,421 [INFO] -   Train -> Loss: 0.0745 | MAE: 198.33 | Grad Norm: 0.41
+2025-07-27 20:18:09,421 [INFO] -   - Val Vel   -> Loss: 0.0659 | MAE: 198.01 | SSIM: 0.6653
+2025-07-27 20:18:09,421 [INFO] -   - Val Style -> Loss: 0.0414 | MAE: 124.06 | SSIM: 0.8195
+2025-07-27 20:18:09,421 [INFO] -   - Val Fault -> Loss: 0.0572 | MAE: 172.63 | SSIM: 0.7479
+2025-07-27 20:18:09,421 [INFO] -   Overall Valid -> Avg MAE: 164.90
+2025-07-27 20:18:09,424 [INFO] - Metric improved to 164.9041. Saving best EMA model.
+2025-07-27 20:50:17,733 [INFO] - --- Epoch 4/50 | Time: 1927.61s ---
+2025-07-27 20:50:17,733 [INFO] -   Train -> Loss: 0.0693 | MAE: 173.27 | Grad Norm: 0.41
+2025-07-27 20:50:17,734 [INFO] -   - Val Vel   -> Loss: 0.0526 | MAE: 158.37 | SSIM: 0.7117
+2025-07-27 20:50:17,734 [INFO] -   - Val Style -> Loss: 0.0378 | MAE: 113.06 | SSIM: 0.8393
+2025-07-27 20:50:17,734 [INFO] -   - Val Fault -> Loss: 0.0508 | MAE: 153.51 | SSIM: 0.7779
+2025-07-27 20:50:17,734 [INFO] -   Overall Valid -> Avg MAE: 141.65
+2025-07-27 20:50:17,736 [INFO] - Metric improved to 141.6452. Saving best EMA model.
+2025-07-27 21:22:25,673 [INFO] - --- Epoch 5/50 | Time: 1927.27s ---
+2025-07-27 21:22:25,674 [INFO] -   Train -> Loss: 0.0659 | MAE: 157.19 | Grad Norm: 0.41
+2025-07-27 21:22:25,674 [INFO] -   - Val Vel   -> Loss: 0.0446 | MAE: 134.28 | SSIM: 0.7426
+2025-07-27 21:22:25,674 [INFO] -   - Val Style -> Loss: 0.0352 | MAE: 105.33 | SSIM: 0.8542
+2025-07-27 21:22:25,674 [INFO] -   - Val Fault -> Loss: 0.0467 | MAE: 141.08 | SSIM: 0.8011
+2025-07-27 21:22:25,674 [INFO] -   Overall Valid -> Avg MAE: 126.90
+2025-07-27 21:22:25,684 [INFO] - Metric improved to 126.8970. Saving best EMA model.
+2025-07-27 21:22:26,348 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_5.pth at epoch 5
+2025-07-27 21:22:28,975 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_5.pth
+2025-07-27 21:22:32,161 [INFO] - Warmup completed at step 3675, starting restart monitoring
+2025-07-27 21:54:36,083 [INFO] - --- Epoch 6/50 | Time: 1927.11s ---
+2025-07-27 21:54:36,084 [INFO] -   Train -> Loss: 0.0623 | MAE: 142.35 | Grad Norm: 0.37
+2025-07-27 21:54:36,084 [INFO] -   - Val Vel   -> Loss: 0.0382 | MAE: 114.28 | SSIM: 0.7675
+2025-07-27 21:54:36,084 [INFO] -   - Val Style -> Loss: 0.0330 | MAE: 98.64 | SSIM: 0.8667
+2025-07-27 21:54:36,084 [INFO] -   - Val Fault -> Loss: 0.0429 | MAE: 129.13 | SSIM: 0.8181
+2025-07-27 21:54:36,084 [INFO] -   Overall Valid -> Avg MAE: 114.02
+2025-07-27 21:54:36,087 [INFO] - Metric improved to 114.0154. Saving best EMA model.
+2025-07-27 22:26:44,808 [INFO] - --- Epoch 7/50 | Time: 1928.01s ---
+2025-07-27 22:26:44,808 [INFO] -   Train -> Loss: 0.0588 | MAE: 129.12 | Grad Norm: 0.34
+2025-07-27 22:26:44,808 [INFO] -   - Val Vel   -> Loss: 0.0329 | MAE: 98.94 | SSIM: 0.7879
+2025-07-27 22:26:44,808 [INFO] -   - Val Style -> Loss: 0.0312 | MAE: 93.31 | SSIM: 0.8759
+2025-07-27 22:26:44,808 [INFO] -   - Val Fault -> Loss: 0.0399 | MAE: 120.37 | SSIM: 0.8313
+2025-07-27 22:26:44,808 [INFO] -   Overall Valid -> Avg MAE: 104.21
+2025-07-27 22:26:44,812 [INFO] - Metric improved to 104.2095. Saving best EMA model.
+2025-07-27 22:58:54,080 [INFO] - --- Epoch 8/50 | Time: 1928.56s ---
+2025-07-27 22:58:54,087 [INFO] -   Train -> Loss: 0.0561 | MAE: 119.69 | Grad Norm: 0.34
+2025-07-27 22:58:54,087 [INFO] -   - Val Vel   -> Loss: 0.0295 | MAE: 88.40 | SSIM: 0.8008
+2025-07-27 22:58:54,087 [INFO] -   - Val Style -> Loss: 0.0300 | MAE: 89.77 | SSIM: 0.8825
+2025-07-27 22:58:54,087 [INFO] -   - Val Fault -> Loss: 0.0376 | MAE: 113.46 | SSIM: 0.8398
+2025-07-27 22:58:54,087 [INFO] -   Overall Valid -> Avg MAE: 97.21
+2025-07-27 22:58:54,090 [INFO] - Metric improved to 97.2081. Saving best EMA model.
+2025-07-27 23:31:01,941 [INFO] - --- Epoch 9/50 | Time: 1927.14s ---
+2025-07-27 23:31:01,942 [INFO] -   Train -> Loss: 0.0531 | MAE: 109.89 | Grad Norm: 0.31
+2025-07-27 23:31:01,942 [INFO] -   - Val Vel   -> Loss: 0.0260 | MAE: 77.78 | SSIM: 0.8109
+2025-07-27 23:31:01,942 [INFO] -   - Val Style -> Loss: 0.0290 | MAE: 86.67 | SSIM: 0.8881
+2025-07-27 23:31:01,942 [INFO] -   - Val Fault -> Loss: 0.0354 | MAE: 106.90 | SSIM: 0.8460
+2025-07-27 23:31:01,942 [INFO] -   Overall Valid -> Avg MAE: 90.45
+2025-07-27 23:31:01,944 [INFO] - Metric improved to 90.4493. Saving best EMA model.
+2025-07-28 00:03:09,929 [INFO] - --- Epoch 10/50 | Time: 1927.27s ---
+2025-07-28 00:03:09,929 [INFO] -   Train -> Loss: 0.0508 | MAE: 102.60 | Grad Norm: 0.31
+2025-07-28 00:03:09,929 [INFO] -   - Val Vel   -> Loss: 0.0237 | MAE: 70.91 | SSIM: 0.8196
+2025-07-28 00:03:09,929 [INFO] -   - Val Style -> Loss: 0.0282 | MAE: 84.34 | SSIM: 0.8919
+2025-07-28 00:03:09,929 [INFO] -   - Val Fault -> Loss: 0.0340 | MAE: 102.61 | SSIM: 0.8500
+2025-07-28 00:03:09,929 [INFO] -   Overall Valid -> Avg MAE: 85.95
+2025-07-28 00:03:09,932 [INFO] - Metric improved to 85.9489. Saving best EMA model.
+2025-07-28 00:03:10,648 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_10.pth at epoch 10
+2025-07-28 00:03:13,177 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_10.pth
+2025-07-28 00:35:19,847 [INFO] - --- Epoch 11/50 | Time: 1926.67s ---
+2025-07-28 00:35:19,854 [INFO] -   Train -> Loss: 0.0485 | MAE: 95.43 | Grad Norm: 0.25
+2025-07-28 00:35:19,854 [INFO] -   - Val Vel   -> Loss: 0.0217 | MAE: 65.29 | SSIM: 0.8263
+2025-07-28 00:35:19,854 [INFO] -   - Val Style -> Loss: 0.0276 | MAE: 82.61 | SSIM: 0.8948
+2025-07-28 00:35:19,854 [INFO] -   - Val Fault -> Loss: 0.0328 | MAE: 99.30 | SSIM: 0.8538
+2025-07-28 00:35:19,854 [INFO] -   Overall Valid -> Avg MAE: 82.40
+2025-07-28 00:35:19,856 [INFO] - Metric improved to 82.3993. Saving best EMA model.
+2025-07-28 01:07:27,731 [INFO] - --- Epoch 12/50 | Time: 1927.16s ---
+2025-07-28 01:07:27,735 [INFO] -   Train -> Loss: 0.0470 | MAE: 90.80 | Grad Norm: 0.18
+2025-07-28 01:07:27,735 [INFO] -   - Val Vel   -> Loss: 0.0207 | MAE: 62.32 | SSIM: 0.8304
+2025-07-28 01:07:27,735 [INFO] -   - Val Style -> Loss: 0.0272 | MAE: 81.68 | SSIM: 0.8961
+2025-07-28 01:07:27,735 [INFO] -   - Val Fault -> Loss: 0.0321 | MAE: 97.47 | SSIM: 0.8558
+2025-07-28 01:07:27,736 [INFO] -   Overall Valid -> Avg MAE: 80.49
+2025-07-28 01:07:27,738 [INFO] - Metric improved to 80.4920. Saving best EMA model.
+2025-07-28 01:37:07,843 [INFO] - 🔄 Warm restart #1 detected at step 9554 (LR: 5.00e-07 → 1.50e-04, ratio: 300.0x)
+2025-07-28 01:39:36,099 [INFO] - --- Epoch 13/50 | Time: 1927.64s ---
+2025-07-28 01:39:36,100 [INFO] -   Train -> Loss: 0.0462 | MAE: 88.68 | Grad Norm: 0.13
+2025-07-28 01:39:36,100 [INFO] -   - Val Vel   -> Loss: 0.0204 | MAE: 61.36 | SSIM: 0.8311
+2025-07-28 01:39:36,100 [INFO] -   - Val Style -> Loss: 0.0272 | MAE: 81.46 | SSIM: 0.8966
+2025-07-28 01:39:36,100 [INFO] -   - Val Fault -> Loss: 0.0319 | MAE: 96.88 | SSIM: 0.8556
+2025-07-28 01:39:36,100 [INFO] -   Overall Valid -> Avg MAE: 79.90
+2025-07-28 01:39:36,103 [INFO] - Metric improved to 79.9019. Saving best EMA model.
+2025-07-28 02:11:44,133 [INFO] - --- Epoch 14/50 | Time: 1927.33s ---
+2025-07-28 02:11:44,134 [INFO] -   Train -> Loss: 0.0561 | MAE: 120.95 | Grad Norm: 0.36
+2025-07-28 02:11:44,134 [INFO] -   - Val Vel   -> Loss: 0.0255 | MAE: 75.92 | SSIM: 0.8235
+2025-07-28 02:11:44,134 [INFO] -   - Val Style -> Loss: 0.0281 | MAE: 84.16 | SSIM: 0.8942
+2025-07-28 02:11:44,134 [INFO] -   - Val Fault -> Loss: 0.0345 | MAE: 103.81 | SSIM: 0.8564
+2025-07-28 02:11:44,134 [INFO] -   Overall Valid -> Avg MAE: 87.96
+2025-07-28 02:11:44,137 [INFO] - EarlyStopping counter: 1/5
+2025-07-28 02:43:51,894 [INFO] - Augmentation strength decayed from 1.000 to 0.980
+2025-07-28 02:43:51,898 [INFO] - --- Epoch 15/50 | Time: 1927.76s ---
+2025-07-28 02:43:51,898 [INFO] -   Train -> Loss: 0.0519 | MAE: 106.09 | Grad Norm: 0.31
+2025-07-28 02:43:51,898 [INFO] -   - Val Vel   -> Loss: 0.0230 | MAE: 68.68 | SSIM: 0.8329
+2025-07-28 02:43:51,898 [INFO] -   - Val Style -> Loss: 0.0273 | MAE: 81.72 | SSIM: 0.8983
+2025-07-28 02:43:51,898 [INFO] -   - Val Fault -> Loss: 0.0326 | MAE: 98.59 | SSIM: 0.8609
+2025-07-28 02:43:51,898 [INFO] -   Overall Valid -> Avg MAE: 82.99
+2025-07-28 02:43:51,901 [INFO] - EarlyStopping counter: 2/5
+2025-07-28 02:43:51,901 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_15.pth at epoch 15
+2025-07-28 02:43:54,362 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_15.pth
+2025-07-28 03:16:01,571 [INFO] - --- Epoch 16/50 | Time: 1927.21s ---
+2025-07-28 03:16:01,571 [INFO] -   Train -> Loss: 0.0503 | MAE: 100.97 | Grad Norm: 0.31
+2025-07-28 03:16:01,571 [INFO] -   - Val Vel   -> Loss: 0.0215 | MAE: 64.59 | SSIM: 0.8361
+2025-07-28 03:16:01,571 [INFO] -   - Val Style -> Loss: 0.0266 | MAE: 79.63 | SSIM: 0.9014
+2025-07-28 03:16:01,571 [INFO] -   - Val Fault -> Loss: 0.0315 | MAE: 95.15 | SSIM: 0.8611
+2025-07-28 03:16:01,571 [INFO] -   Overall Valid -> Avg MAE: 79.79
+2025-07-28 03:16:01,574 [INFO] - Metric improved to 79.7893. Saving best EMA model.
+2025-07-28 03:48:09,432 [INFO] - --- Epoch 17/50 | Time: 1927.14s ---
+2025-07-28 03:48:09,438 [INFO] -   Train -> Loss: 0.0486 | MAE: 96.00 | Grad Norm: 0.29
+2025-07-28 03:48:09,438 [INFO] -   - Val Vel   -> Loss: 0.0202 | MAE: 60.80 | SSIM: 0.8460
+2025-07-28 03:48:09,438 [INFO] -   - Val Style -> Loss: 0.0260 | MAE: 77.90 | SSIM: 0.9047
+2025-07-28 03:48:09,438 [INFO] -   - Val Fault -> Loss: 0.0305 | MAE: 92.41 | SSIM: 0.8703
+2025-07-28 03:48:09,438 [INFO] -   Overall Valid -> Avg MAE: 77.04
+2025-07-28 03:48:09,441 [INFO] - Metric improved to 77.0358. Saving best EMA model.
+2025-07-28 04:20:17,189 [INFO] - --- Epoch 18/50 | Time: 1927.05s ---
+2025-07-28 04:20:17,190 [INFO] -   Train -> Loss: 0.0474 | MAE: 92.97 | Grad Norm: 0.29
+2025-07-28 04:20:17,190 [INFO] -   - Val Vel   -> Loss: 0.0192 | MAE: 57.76 | SSIM: 0.8510
+2025-07-28 04:20:17,190 [INFO] -   - Val Style -> Loss: 0.0254 | MAE: 76.46 | SSIM: 0.9075
+2025-07-28 04:20:17,190 [INFO] -   - Val Fault -> Loss: 0.0296 | MAE: 89.88 | SSIM: 0.8729
+2025-07-28 04:20:17,190 [INFO] -   Overall Valid -> Avg MAE: 74.70
+2025-07-28 04:20:17,193 [INFO] - Metric improved to 74.7013. Saving best EMA model.
+2025-07-28 04:52:25,720 [INFO] - --- Epoch 19/50 | Time: 1927.80s ---
+2025-07-28 04:52:25,721 [INFO] -   Train -> Loss: 0.0459 | MAE: 88.99 | Grad Norm: 0.28
+2025-07-28 04:52:25,721 [INFO] -   - Val Vel   -> Loss: 0.0184 | MAE: 55.25 | SSIM: 0.8543
+2025-07-28 04:52:25,721 [INFO] -   - Val Style -> Loss: 0.0251 | MAE: 75.26 | SSIM: 0.9096
+2025-07-28 04:52:25,721 [INFO] -   - Val Fault -> Loss: 0.0290 | MAE: 87.95 | SSIM: 0.8757
+2025-07-28 04:52:25,721 [INFO] -   Overall Valid -> Avg MAE: 72.82
+2025-07-28 04:52:25,724 [INFO] - Metric improved to 72.8221. Saving best EMA model.
+2025-07-28 05:24:35,569 [INFO] - --- Epoch 20/50 | Time: 1929.13s ---
+2025-07-28 05:24:35,570 [INFO] -   Train -> Loss: 0.0446 | MAE: 84.61 | Grad Norm: 0.25
+2025-07-28 05:24:35,570 [INFO] -   - Val Vel   -> Loss: 0.0174 | MAE: 51.97 | SSIM: 0.8583
+2025-07-28 05:24:35,570 [INFO] -   - Val Style -> Loss: 0.0247 | MAE: 73.99 | SSIM: 0.9116
+2025-07-28 05:24:35,570 [INFO] -   - Val Fault -> Loss: 0.0282 | MAE: 85.29 | SSIM: 0.8756
+2025-07-28 05:24:35,570 [INFO] -   Overall Valid -> Avg MAE: 70.42
+2025-07-28 05:24:35,573 [INFO] - Metric improved to 70.4185. Saving best EMA model.
+2025-07-28 05:24:36,291 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_20.pth at epoch 20
+2025-07-28 05:24:38,653 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_20.pth
+2025-07-28 05:56:47,484 [INFO] - --- Epoch 21/50 | Time: 1928.83s ---
+2025-07-28 05:56:47,490 [INFO] -   Train -> Loss: 0.0433 | MAE: 81.67 | Grad Norm: 0.26
+2025-07-28 05:56:47,491 [INFO] -   - Val Vel   -> Loss: 0.0167 | MAE: 50.25 | SSIM: 0.8615
+2025-07-28 05:56:47,491 [INFO] -   - Val Style -> Loss: 0.0243 | MAE: 73.07 | SSIM: 0.9133
+2025-07-28 05:56:47,491 [INFO] -   - Val Fault -> Loss: 0.0275 | MAE: 83.60 | SSIM: 0.8780
+2025-07-28 05:56:47,491 [INFO] -   Overall Valid -> Avg MAE: 68.97
+2025-07-28 05:56:47,493 [INFO] - Metric improved to 68.9724. Saving best EMA model.
+2025-07-28 06:28:55,244 [INFO] - --- Epoch 22/50 | Time: 1927.04s ---
+2025-07-28 06:28:55,245 [INFO] -   Train -> Loss: 0.0420 | MAE: 78.53 | Grad Norm: 0.24
+2025-07-28 06:28:55,245 [INFO] -   - Val Vel   -> Loss: 0.0160 | MAE: 48.64 | SSIM: 0.8652
+2025-07-28 06:28:55,245 [INFO] -   - Val Style -> Loss: 0.0240 | MAE: 72.32 | SSIM: 0.9146
+2025-07-28 06:28:55,245 [INFO] -   - Val Fault -> Loss: 0.0269 | MAE: 81.89 | SSIM: 0.8811
+2025-07-28 06:28:55,245 [INFO] -   Overall Valid -> Avg MAE: 67.62
+2025-07-28 06:28:55,248 [INFO] - Metric improved to 67.6154. Saving best EMA model.
+2025-07-28 07:01:02,687 [INFO] - --- Epoch 23/50 | Time: 1926.77s ---
+2025-07-28 07:01:02,688 [INFO] -   Train -> Loss: 0.0411 | MAE: 75.74 | Grad Norm: 0.23
+2025-07-28 07:01:02,688 [INFO] -   - Val Vel   -> Loss: 0.0155 | MAE: 46.92 | SSIM: 0.8669
+2025-07-28 07:01:02,688 [INFO] -   - Val Style -> Loss: 0.0238 | MAE: 71.66 | SSIM: 0.9160
+2025-07-28 07:01:02,688 [INFO] -   - Val Fault -> Loss: 0.0265 | MAE: 80.43 | SSIM: 0.8816
+2025-07-28 07:01:02,688 [INFO] -   Overall Valid -> Avg MAE: 66.34
+2025-07-28 07:01:02,691 [INFO] - Metric improved to 66.3393. Saving best EMA model.
+2025-07-28 07:33:10,221 [INFO] - --- Epoch 24/50 | Time: 1926.80s ---
+2025-07-28 07:33:10,227 [INFO] -   Train -> Loss: 0.0402 | MAE: 73.46 | Grad Norm: 0.22
+2025-07-28 07:33:10,227 [INFO] -   - Val Vel   -> Loss: 0.0150 | MAE: 45.66 | SSIM: 0.8692
+2025-07-28 07:33:10,227 [INFO] -   - Val Style -> Loss: 0.0236 | MAE: 70.95 | SSIM: 0.9169
+2025-07-28 07:33:10,227 [INFO] -   - Val Fault -> Loss: 0.0260 | MAE: 79.10 | SSIM: 0.8818
+2025-07-28 07:33:10,227 [INFO] -   Overall Valid -> Avg MAE: 65.23
+2025-07-28 07:33:10,230 [INFO] - Metric improved to 65.2338. Saving best EMA model.
+2025-07-28 08:05:17,520 [INFO] - --- Epoch 25/50 | Time: 1926.58s ---
+2025-07-28 08:05:17,520 [INFO] -   Train -> Loss: 0.0392 | MAE: 70.99 | Grad Norm: 0.19
+2025-07-28 08:05:17,520 [INFO] -   - Val Vel   -> Loss: 0.0147 | MAE: 44.73 | SSIM: 0.8709
+2025-07-28 08:05:17,520 [INFO] -   - Val Style -> Loss: 0.0234 | MAE: 70.51 | SSIM: 0.9177
+2025-07-28 08:05:17,521 [INFO] -   - Val Fault -> Loss: 0.0258 | MAE: 78.50 | SSIM: 0.8836
+2025-07-28 08:05:17,521 [INFO] -   Overall Valid -> Avg MAE: 64.58
+2025-07-28 08:05:17,523 [INFO] - Metric improved to 64.5804. Saving best EMA model.
+2025-07-28 08:05:18,254 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_25.pth at epoch 25
+2025-07-28 08:05:20,676 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_25.pth
+2025-07-28 08:37:27,433 [INFO] - --- Epoch 26/50 | Time: 1926.76s ---
+2025-07-28 08:37:27,440 [INFO] -   Train -> Loss: 0.0384 | MAE: 69.05 | Grad Norm: 0.15
+2025-07-28 08:37:27,440 [INFO] -   - Val Vel   -> Loss: 0.0144 | MAE: 44.02 | SSIM: 0.8713
+2025-07-28 08:37:27,440 [INFO] -   - Val Style -> Loss: 0.0233 | MAE: 70.12 | SSIM: 0.9182
+2025-07-28 08:37:27,440 [INFO] -   - Val Fault -> Loss: 0.0256 | MAE: 77.76 | SSIM: 0.8830
+2025-07-28 08:37:27,440 [INFO] -   Overall Valid -> Avg MAE: 63.97
+2025-07-28 08:37:27,443 [INFO] - Metric improved to 63.9659. Saving best EMA model.
+2025-07-28 09:09:35,286 [INFO] - --- Epoch 27/50 | Time: 1927.13s ---
+2025-07-28 09:09:35,287 [INFO] -   Train -> Loss: 0.0379 | MAE: 67.95 | Grad Norm: 0.12
+2025-07-28 09:09:35,287 [INFO] -   - Val Vel   -> Loss: 0.0142 | MAE: 43.51 | SSIM: 0.8721
+2025-07-28 09:09:35,287 [INFO] -   - Val Style -> Loss: 0.0233 | MAE: 69.98 | SSIM: 0.9185
+2025-07-28 09:09:35,287 [INFO] -   - Val Fault -> Loss: 0.0254 | MAE: 77.38 | SSIM: 0.8838
+2025-07-28 09:09:35,287 [INFO] -   Overall Valid -> Avg MAE: 63.62
+2025-07-28 09:09:35,290 [INFO] - Metric improved to 63.6206. Saving best EMA model.
+2025-07-28 09:41:42,405 [INFO] - --- Epoch 28/50 | Time: 1926.40s ---
+2025-07-28 09:41:42,406 [INFO] -   Train -> Loss: 0.0376 | MAE: 67.04 | Grad Norm: 0.10
+2025-07-28 09:41:42,406 [INFO] -   - Val Vel   -> Loss: 0.0141 | MAE: 43.22 | SSIM: 0.8724
+2025-07-28 09:41:42,406 [INFO] -   - Val Style -> Loss: 0.0233 | MAE: 69.86 | SSIM: 0.9187
+2025-07-28 09:41:42,406 [INFO] -   - Val Fault -> Loss: 0.0253 | MAE: 77.04 | SSIM: 0.8836
+2025-07-28 09:41:42,406 [INFO] -   Overall Valid -> Avg MAE: 63.37
+2025-07-28 09:41:42,435 [INFO] - Metric improved to 63.3742. Saving best EMA model.
+2025-07-28 10:11:21,952 [INFO] - 🔄 Warm restart #2 detected at step 21314 (LR: 5.00e-07 → 1.50e-04, ratio: 300.0x)
+2025-07-28 10:13:50,803 [INFO] - --- Epoch 29/50 | Time: 1927.68s ---
+2025-07-28 10:13:50,804 [INFO] -   Train -> Loss: 0.0375 | MAE: 66.69 | Grad Norm: 0.08
+2025-07-28 10:13:50,804 [INFO] -   - Val Vel   -> Loss: 0.0141 | MAE: 43.07 | SSIM: 0.8725
+2025-07-28 10:13:50,804 [INFO] -   - Val Style -> Loss: 0.0232 | MAE: 69.82 | SSIM: 0.9188
+2025-07-28 10:13:50,804 [INFO] -   - Val Fault -> Loss: 0.0253 | MAE: 76.94 | SSIM: 0.8844
+2025-07-28 10:13:50,804 [INFO] -   Overall Valid -> Avg MAE: 63.27
+2025-07-28 10:13:50,806 [INFO] - Metric improved to 63.2749. Saving best EMA model.
+2025-07-28 10:45:58,991 [INFO] - --- Epoch 30/50 | Time: 1927.47s ---
+2025-07-28 10:45:58,991 [INFO] -   Train -> Loss: 0.0481 | MAE: 97.05 | Grad Norm: 0.32
+2025-07-28 10:45:58,991 [INFO] -   - Val Vel   -> Loss: 0.0175 | MAE: 52.65 | SSIM: 0.8614
+2025-07-28 10:45:58,991 [INFO] -   - Val Style -> Loss: 0.0242 | MAE: 72.82 | SSIM: 0.9154
+2025-07-28 10:45:58,991 [INFO] -   - Val Fault -> Loss: 0.0277 | MAE: 83.61 | SSIM: 0.8803
+2025-07-28 10:45:58,992 [INFO] -   Overall Valid -> Avg MAE: 69.70
+2025-07-28 10:45:58,994 [INFO] - EarlyStopping counter: 1/5
+2025-07-28 10:45:58,994 [INFO] - Saving checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_30.pth at epoch 30
+2025-07-28 10:46:01,507 [INFO] - Successfully saved checkpoint to /home/gkhanal/fwi_project/fwi_test/swinv2/results/july27/checkpoint_epoch_30.pth
+2025-07-28 11:18:09,298 [INFO] - Augmentation strength decayed from 0.980 to 0.960
+2025-07-28 11:18:09,298 [INFO] - --- Epoch 31/50 | Time: 1927.79s ---
+2025-07-28 11:18:09,299 [INFO] -   Train -> Loss: 0.0446 | MAE: 85.33 | Grad Norm: 0.28
+2025-07-28 11:18:09,299 [INFO] -   - Val Vel   -> Loss: 0.0169 | MAE: 50.93 | SSIM: 0.8647
+2025-07-28 11:18:09,299 [INFO] -   - Val Style -> Loss: 0.0238 | MAE: 71.70 | SSIM: 0.9170
+2025-07-28 11:18:09,299 [INFO] -   - Val Fault -> Loss: 0.0269 | MAE: 81.37 | SSIM: 0.8835
+2025-07-28 11:18:09,299 [INFO] -   Overall Valid -> Avg MAE: 68.00
+2025-07-28 11:18:09,312 [INFO] - EarlyStopping counter: 2/5
+2025-07-28 11:50:17,447 [INFO] - --- Epoch 32/50 | Time: 1928.13s ---
+2025-07-28 11:50:17,447 [INFO] -   Train -> Loss: 0.0432 | MAE: 81.76 | Grad Norm: 0.26
+2025-07-28 11:50:17,448 [INFO] -   - Val Vel   -> Loss: 0.0164 | MAE: 49.44 | SSIM: 0.8638
+2025-07-28 11:50:17,448 [INFO] -   - Val Style -> Loss: 0.0235 | MAE: 70.83 | SSIM: 0.9185
+2025-07-28 11:50:17,448 [INFO] -   - Val Fault -> Loss: 0.0265 | MAE: 79.93 | SSIM: 0.8801
+2025-07-28 11:50:17,448 [INFO] -   Overall Valid -> Avg MAE: 66.73
+2025-07-28 11:50:17,450 [INFO] - EarlyStopping counter: 3/5
+2025-07-28 12:22:25,758 [INFO] - Augmentation strength decayed from 0.960 to 0.941
+2025-07-28 12:22:25,759 [INFO] - --- Epoch 33/50 | Time: 1928.31s ---
+2025-07-28 12:22:25,759 [INFO] -   Train -> Loss: 0.0427 | MAE: 79.92 | Grad Norm: 0.25
+2025-07-28 12:22:25,759 [INFO] -   - Val Vel   -> Loss: 0.0159 | MAE: 48.19 | SSIM: 0.8685
+2025-07-28 12:22:25,759 [INFO] -   - Val Style -> Loss: 0.0232 | MAE: 70.10 | SSIM: 0.9203
+2025-07-28 12:22:25,759 [INFO] -   - Val Fault -> Loss: 0.0260 | MAE: 78.94 | SSIM: 0.8856
+2025-07-28 12:22:25,759 [INFO] -   Overall Valid -> Avg MAE: 65.74
+2025-07-28 12:22:25,762 [INFO] - EarlyStopping counter: 4/5
+2025-07-28 12:54:34,702 [INFO] - --- Epoch 34/50 | Time: 1928.94s ---
+2025-07-28 12:54:34,703 [INFO] -   Train -> Loss: 0.0418 | MAE: 77.88 | Grad Norm: 0.26
+2025-07-28 12:54:34,703 [INFO] -   - Val Vel   -> Loss: 0.0156 | MAE: 47.37 | SSIM: 0.8714
+2025-07-28 12:54:34,703 [INFO] -   - Val Style -> Loss: 0.0230 | MAE: 69.50 | SSIM: 0.9214
+2025-07-28 12:54:34,703 [INFO] -   - Val Fault -> Loss: 0.0257 | MAE: 78.05 | SSIM: 0.8864
+2025-07-28 12:54:34,703 [INFO] -   Overall Valid -> Avg MAE: 64.97
+2025-07-28 12:54:34,706 [INFO] - EarlyStopping counter: 5/5
+2025-07-28 12:54:34,706 [INFO] - Early stopping triggered.
+2025-07-28 12:55:34,955 [INFO] - --- Training Complete | Total Time: 18.23 hours ---
+2025-07-28 12:55:34,956 [INFO] - Best validation MAE achieved: 63.2749
+2025-07-28 12:55:34,957 [ERROR] - DDP initialization failed: trying to initialize the default process group twice!. Falling back to single-GPU.
+2025-07-28 12:55:35,221 [INFO] - Loading pretrained weights from Hugging Face hub (timm/swinv2_tiny_window8_256.ms_in1k)
+2025-07-28 12:55:35,426 [INFO] - [timm/swinv2_tiny_window8_256.ms_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2025-07-28 12:55:35,446 [INFO] - Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+2025-07-28 12:55:35,450 [INFO] - Gradient checkpointing enabled for backbone.
+2025-07-28 12:55:35,450 [INFO] - Building enhanced decoder with channels: [512, 256, 128]
+2025-07-28 12:55:35,450 [INFO] - Encoder channels: [96, 192, 384, 768]
