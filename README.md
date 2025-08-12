@@ -23,6 +23,10 @@ A U-Net style model with a powerful, pretrained Swin Transformer v2 encoder and 
 
 ### Comprehensive Loss Function
 
+We use a powerful combination of loss functions to provide the best (yet) performance:
+
+$$ \mathcal{L} = \alpha \cdot \mathcal{L}_{\text{Huber}} + \beta \cdot \mathcal{L}_{\text{Gradient}} + \gamma \cdot \mathcal{L}_{\text{TV}} $$
+
 - **Huber loss** for robust regression
 - **Gradient matching loss** for structural preservation
 - **Total variation regularization** for smooth outputs
