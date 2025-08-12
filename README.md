@@ -1,9 +1,3 @@
----
-markdown: kramdown
-kramdown:
-  math_engine: mathjax
----
-
 # SwinUNet-FWI: Full Waveform Inversion with Swin Transformers
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
