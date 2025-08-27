@@ -249,6 +249,206 @@ torchrun --nproc_per_node=NUM_GPUS fwi_swinunet_pipeline.py</code></pre>
 <li><p><code>main()</code>: The main execution function that orchestrates the entire pipeline.</p></li>
 </ul>
 </section>
+<section id="results-and-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-evaluation">Results and Evaluation</h2>
+<p>The model trained for 34 out of 50 planned epochs before early stopping trig-gered. The total training duration was approximately 18.23 hours using efficient training technologues like DDP and AMP in 2x <code>H100</code> GPUs. The best valida-tion MAE was achieved at Epoch 29 with an overall (average) validation MAE of 63.27 m/s:</p>
+<div id="tbl-best-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-best-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Best EMA model
+</figcaption>
+<div aria-describedby="tbl-best-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Loss</th>
+<th>MAE</th>
+<th>Grad Norm</th>
+<th>SSIM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Train (Avg)</td>
+<td>0.0375</td>
+<td>66.69</td>
+<td>0.08</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>Val “Vel” Group</td>
+<td>0.0141</td>
+<td>43.07</td>
+<td>-</td>
+<td>0.8725</td>
+</tr>
+<tr class="odd">
+<td>Val “Style” Group</td>
+<td>0.0232</td>
+<td>69.82</td>
+<td>-</td>
+<td>0.9188</td>
+</tr>
+<tr class="even">
+<td>Val “Fault” Group</td>
+<td>0.0253</td>
+<td>76.94</td>
+<td>-</td>
+<td>0.8844</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The model achieved its best overall validation MAE of 63.27 at Epoch 29. This significant reduction from an initial MAE of 308.34 in Epoch 1 demonstrates the effectiveness of the combined loss function, ro-bust architecture, and comprehensive augmentation strategy.</p>
+<div id="tbl-epoch-metrics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-epoch-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Model training metrics across epochs
+</figcaption>
+<div aria-describedby="tbl-epoch-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Metric</strong></th>
+<th><strong>Epoch 1</strong></th>
+<th><strong>Epoch 5</strong></th>
+<th><strong>Epoch 10</strong></th>
+<th><strong>Epoch 13</strong></th>
+<th><strong>Epoch 20</strong></th>
+<th><strong>Epoch 29</strong></th>
+<th><strong>Epoch 3</strong>4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Train Loss</td>
+<td>0.1154</td>
+<td>0.0659</td>
+<td>0.0508</td>
+<td>0.0462</td>
+<td>0.0446</td>
+<td>0.0375</td>
+<td>0.0418</td>
+</tr>
+<tr class="even">
+<td>Train MAE</td>
+<td>439.84</td>
+<td>157.19</td>
+<td>102.60</td>
+<td>88.68</td>
+<td>84.61</td>
+<td>66.69</td>
+<td>77.88</td>
+</tr>
+<tr class="odd">
+<td>Overall Val MAE</td>
+<td>308.34</td>
+<td>126.90</td>
+<td>85.95</td>
+<td>79.90</td>
+<td>70.42</td>
+<td><strong>63.27</strong></td>
+<td>64.97</td>
+</tr>
+<tr class="even">
+<td>Val Vel MAE</td>
+<td>398.78</td>
+<td>134.28</td>
+<td>70.91</td>
+<td>61.36</td>
+<td>51.97</td>
+<td>43.07</td>
+<td>47.37</td>
+</tr>
+<tr class="odd">
+<td>Val Style MAE</td>
+<td>191.19</td>
+<td>105.33</td>
+<td>84.34</td>
+<td>81.46</td>
+<td>73.99</td>
+<td>69.82</td>
+<td>69.50</td>
+</tr>
+<tr class="even">
+<td>Val Fault MAE</td>
+<td>335.04</td>
+<td>141.08</td>
+<td>102.61</td>
+<td>96.88</td>
+<td>85.29</td>
+<td>76.94</td>
+<td>78.05</td>
+</tr>
+<tr class="odd">
+<td>Val Vel SSIM</td>
+<td>0.4973</td>
+<td>0.7426</td>
+<td>0.8196</td>
+<td>0.8311</td>
+<td>0.8583</td>
+<td>0.8725</td>
+<td>0.8714</td>
+</tr>
+<tr class="even">
+<td>Val Style SSIM</td>
+<td>0.7389</td>
+<td>0.8542</td>
+<td>0.8919</td>
+<td>0.8966</td>
+<td>0.9116</td>
+<td>0.9188</td>
+<td>0.9214</td>
+</tr>
+<tr class="odd">
+<td>Val Fault SSIM</td>
+<td>0.6343</td>
+<td>0.8011</td>
+<td>0.8500</td>
+<td>0.8556</td>
+<td>0.8756</td>
+<td>0.8844</td>
+<td>0.8864</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Furthermore, we observed a consistent reduction in MAE across all three prediction tasks (Vel, Style, and Fault) and a corresponding increase in SSIM, indicating improved structural similarity between predictions and ground truth.</p>
+<section id="predicted-velocity-maps" class="level3">
+<h3 class="anchored" data-anchor-id="predicted-velocity-maps">Predicted Velocity Maps</h3>
+<p>Across all displayed samples and groups, the predicted images closely resemble their corresponding actual counterparts. The model appears to maintain a good level of sharpness and detail in its predictions, especially for complex geological structures. The diversity of the samples shown (ranging from layered structures to more complex, chaotic patterns) suggests that the model has done a good job in generalizing the various geological scenarios within the dataset.</p>
+<section id="vel-family" class="level4">
+<h4 class="anchored" data-anchor-id="vel-family">“Vel” Family</h4>
+<p>The “Vel” samples show excellent (best of the three) agreement between ground truth and prediction. The layered structures are accurately repro-duced, and the transitions between different velocity zones are smooth and well-defined.</p>
+<p><img src="vel_predictions.png" class="img-fluid"></p>
+</section>
+<section id="style-family" class="level4">
+<h4 class="anchored" data-anchor-id="style-family">“Style” Family</h4>
+<p>The “Style” samples, which appear to represent more abstract or textural properties, are also well-predicted. The model captures the overall “flow” and patterns, even in intricate designs.</p>
+<p><img src="style_predictions.png" class="img-fluid"></p>
+</section>
+<section id="fault-family" class="level4">
+<h4 class="anchored" data-anchor-id="fault-family">“Fault” Family</h4>
+<p>The “Fault” samples demonstrate the model’s ability to delineate complex fault structures. The predictions successfully capture the presence and general orientation of the faults, which are critical for geo-logical interpretation.</p>
+<p><img src="fault_predictions.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
 <section id="citation" class="level2">
 <h2 class="anchored" data-anchor-id="citation">Citation</h2>
 <p>If you use this code in your research, please cite:</p>

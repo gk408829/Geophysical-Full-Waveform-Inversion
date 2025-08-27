@@ -174,6 +174,63 @@ The script is organized into logical, reusable components:
 
 - `main()`: The main execution function that orchestrates the entire pipeline.
 
+## Results and Evaluation
+
+The model trained for 34 out of 50 planned epochs before early stopping trig-gered. The total training duration was approximately 18.23 hours using efficient training technologues like DDP and AMP in 2x `H100` GPUs. The best valida-tion MAE was achieved at Epoch 29 with an overall (average) validation MAE of 63.27 m/s:
+
+|Metric             | Loss   |   MAE   | Grad Norm | SSIM   |
+|-------------------|--------|---------|-----------|--------|
+|Train (Avg)        | 0.0375 |   66.69 | 0.08      | -      |
+|Val "Vel" Group    | 0.0141 |   43.07 | -         | 0.8725 |
+|Val "Style" Group  | 0.0232 |   69.82 | -         | 0.9188 |
+|Val "Fault" Group  | 0.0253 |   76.94 | -         | 0.8844 |
+
+Table: Best EMA model {#tbl-best-model}
+
+The model achieved its best overall validation MAE of 63.27 at Epoch 29. This significant reduction from an initial MAE of 308.34 in Epoch 1 demonstrates the effectiveness of the combined loss function, ro-bust architecture, and comprehensive augmentation strategy. 
+
+| **Metric**            | **Epoch 1**  | **Epoch 5**  | **Epoch 10** | **Epoch 13** | **Epoch 20** | **Epoch 29** | **Epoch 3**4 |
+|-------------------|----------|----------|----------|----------|----------|----------|----------|
+| Train Loss    | 0.1154   | 0.0659   | 0.0508   | 0.0462   | 0.0446   | 0.0375   | 0.0418   |
+| Train MAE     | 439.84   | 157.19   | 102.60   | 88.68    | 84.61    | 66.69    | 77.88    |
+| Overall Val MAE | 308.34 | 126.90   | 85.95    | 79.90    | 70.42    | **63.27** | 64.97   |
+| Val Vel MAE   | 398.78   | 134.28   | 70.91    | 61.36    | 51.97    | 43.07    | 47.37    |
+| Val Style MAE | 191.19   | 105.33   | 84.34    | 81.46    | 73.99    | 69.82    | 69.50    |
+| Val Fault MAE | 335.04   | 141.08   | 102.61   | 96.88    | 85.29    | 76.94    | 78.05    |
+| Val Vel SSIM  | 0.4973   | 0.7426   | 0.8196   | 0.8311   | 0.8583   | 0.8725   | 0.8714   |
+| Val Style SSIM| 0.7389   | 0.8542   | 0.8919   | 0.8966   | 0.9116   | 0.9188   | 0.9214   |
+| Val Fault SSIM| 0.6343   | 0.8011   | 0.8500   | 0.8556   | 0.8756   | 0.8844   | 0.8864   |
+
+Table: Model training metrics across epochs {#tbl-epoch-metrics}
+
+Furthermore, we observed a consistent reduction in MAE across all three prediction tasks (Vel, Style, and Fault) and a corresponding increase in SSIM, indicating improved structural similarity between predictions and ground truth.
+
+### Predicted Velocity Maps
+
+Across all displayed samples and groups, the predicted images closely resemble their corresponding actual counterparts. The model appears to maintain a good level of sharpness and detail in its predictions, especially for complex geological structures. The diversity of the samples shown (ranging from layered structures to more complex, chaotic patterns) suggests that the model has done a good job in generalizing the various geological scenarios within the dataset.
+
+#### "Vel" Family
+
+The “Vel” samples show excellent (best of the three) agreement between ground truth and prediction. The layered structures are accurately repro-duced, and the transitions between different velocity zones are smooth and well-defined.
+
+![](vel_predictions.png)
+
+#### "Style" Family
+
+The “Style” samples, which appear to represent more abstract or textural properties, are also well-predicted. The model captures the overall “flow” and patterns, even in intricate designs.
+
+![](style_predictions.png)
+
+#### "Fault" Family
+
+The “Fault” samples demonstrate the model’s ability to delineate complex fault structures. The predictions successfully capture the presence and general orientation of the faults, which are critical for geo-logical interpretation.
+
+![](fault_predictions.png)
+
+
+
+
+
 ## Citation
 
 If you use this code in your research, please cite:
