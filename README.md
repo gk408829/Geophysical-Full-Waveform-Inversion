@@ -213,19 +213,19 @@ Across all displayed samples and groups, the predicted images closely resemble t
 
 The “Vel” samples show excellent (best of the three) agreement between ground truth and prediction. The layered structures are accurately repro-duced, and the transitions between different velocity zones are smooth and well-defined.
 
-![](vel_predictions.png)
+![](plots/vel_predictions.png)
 
 #### "Style" Family
 
 The “Style” samples, which appear to represent more abstract or textural properties, are also well-predicted. The model captures the overall “flow” and patterns, even in intricate designs.
 
-![](style_predictions.png)
+![](plots/style_predictions.png)
 
 #### "Fault" Family
 
 The “Fault” samples demonstrate the model’s ability to delineate complex fault structures. The predictions successfully capture the presence and general orientation of the faults, which are critical for geo-logical interpretation.
 
-![](fault_predictions.png)
+![](plots/fault_predictions.png)
 
 
 
