@@ -4,6 +4,8 @@
 ![PyTorch](https://img.shields.io/badge/pytorch-2.0+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+![](/plots/Earth's%20crust.png)
+
 This repository contains a high-performance, feature-rich PyTorch pipeline for training a deep learning model for Full-Waveform Inversion (FWI) using the OpenFWI dataset. The model, based on a U-Net architecture with a **Swin Transformer v2** backbone, predicts subsurface velocity models from multi-source seismic data.
 
 The codebase is designed for robustness and performance, incorporating modern deep learning techniques such as Distributed Data Parallel (DDP), `torch.compile`, mixed-precision training, and advanced data augmentation.

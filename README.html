@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="README_files/libs/quarto-html/anchor.min.js"></script>
 <link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="README_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -79,6 +79,7 @@ window.Quarto = {
 <section id="swinunet-fwi-full-waveform-inversion-with-swin-transformers" class="level1">
 <h1>SwinUNet-FWI: Full Waveform Inversion with Swin Transformers</h1>
 <p><img src="https://img.shields.io/badge/python-3.8+-blue.svg" class="img-fluid" alt="Python"> <img src="https://img.shields.io/badge/pytorch-2.0+-red.svg" class="img-fluid" alt="PyTorch"> <img src="https://img.shields.io/badge/license-MIT-green.svg" class="img-fluid" alt="License"></p>
+<p><img src="./plots/Earth's%20crust.png" class="img-fluid"></p>
 <p>This repository contains a high-performance, feature-rich PyTorch pipeline for training a deep learning model for Full-Waveform Inversion (FWI) using the OpenFWI dataset. The model, based on a U-Net architecture with a <strong>Swin Transformer v2</strong> backbone, predicts subsurface velocity models from multi-source seismic data.</p>
 <p>The codebase is designed for robustness and performance, incorporating modern deep learning techniques such as Distributed Data Parallel (DDP), <code>torch.compile</code>, mixed-precision training, and advanced data augmentation.</p>
 <section id="key-features" class="level2">
@@ -435,17 +436,17 @@ Table&nbsp;2: Model training metrics across epochs
 <section id="vel-family" class="level4">
 <h4 class="anchored" data-anchor-id="vel-family">“Vel” Family</h4>
 <p>The “Vel” samples show excellent (best of the three) agreement between ground truth and prediction. The layered structures are accurately repro-duced, and the transitions between different velocity zones are smooth and well-defined.</p>
-<p><img src="vel_predictions.png" class="img-fluid"></p>
+<p><img src="plots/vel_predictions.png" class="img-fluid"></p>
 </section>
 <section id="style-family" class="level4">
 <h4 class="anchored" data-anchor-id="style-family">“Style” Family</h4>
 <p>The “Style” samples, which appear to represent more abstract or textural properties, are also well-predicted. The model captures the overall “flow” and patterns, even in intricate designs.</p>
-<p><img src="style_predictions.png" class="img-fluid"></p>
+<p><img src="plots/style_predictions.png" class="img-fluid"></p>
 </section>
 <section id="fault-family" class="level4">
 <h4 class="anchored" data-anchor-id="fault-family">“Fault” Family</h4>
 <p>The “Fault” samples demonstrate the model’s ability to delineate complex fault structures. The predictions successfully capture the presence and general orientation of the faults, which are critical for geo-logical interpretation.</p>
-<p><img src="fault_predictions.png" class="img-fluid"></p>
+<p><img src="plots/fault_predictions.png" class="img-fluid"></p>
 </section>
 </section>
 </section>
